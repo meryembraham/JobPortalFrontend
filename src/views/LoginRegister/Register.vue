@@ -1,0 +1,497 @@
+<template>
+  <div class="container register mb-50" style="width: 100%">
+    <div
+      class="row"
+      style="width: -webkit-fill-available; margin-bottom: -56px"
+    >
+      <div class="col-md-12">
+        <b-tabs style="margin-right: 115px">
+          <b-tab
+            title="Candidat"
+            style="
+              background-color: transparent;
+              border: none;
+              margin-right: 13px;
+              text-align: center;
+            "
+          >
+            <h3 class="register-heading" style="text-align: center">
+              Inscription Candidat
+            </h3>
+            <div class="row register-form">
+              <div class="col-md-6">
+                <b-form-group
+                  label-cols-lg="3"
+                  label-size="lg"
+                  label-class="font-weight-bold pt-0"
+                  class="mb-0"
+                >
+                  <b-form-group label-cols-sm="3" label-align-sm="right">
+                    <b-form-input
+                      id="nomC"
+                      v-model="form.nom"
+                      type="text"
+                      placeholder="Nom"
+                      required
+                    ></b-form-input>
+                  </b-form-group>
+
+                  <b-form-group label-cols-sm="3" label-align-sm="right">
+                    <b-form-input
+                      id="prenomC"
+                      v-model="form.prenom"
+                      type="text"
+                      placeholder="prenom"
+                      required
+                    ></b-form-input>
+                  </b-form-group>
+
+                  <b-form-group label-cols-sm="3" label-align-sm="right">
+                    <b-form-input
+                      id="emailC"
+                      v-model="form.email"
+                      type="email"
+                      placeholder="Email"
+                      required
+                    ></b-form-input>
+                  </b-form-group>
+
+                  <b-form-group label-cols-sm="3" label-align-sm="right">
+                    <b-form-input
+                      id="passwordC"
+                      v-model="form.password"
+                      type="password"
+                      placeholder="Mot de passe"
+                      required
+                    ></b-form-input>
+                  </b-form-group>
+                  <b-form-group label-cols-sm="3" label-align-sm="right">
+                    <b-form-input
+                      id="password_confirmation_C"
+                      v-model="form.password_confirmation"
+                      type="password"
+                      placeholder="Confirmer le mot de passe"
+                      required
+                    ></b-form-input>
+                  </b-form-group>
+                </b-form-group>
+              </div>
+              <div class="col-md-6" style="margin-top: -9px">
+                <b-form-group
+                  label-cols-lg="3"
+                  label-size="lg"
+                  label-class="font-weight-bold pt-0"
+                  class="mb-0"
+                >
+                  <b-form-group
+                    label-for="tel"
+                    label-cols-sm="3"
+                    label-align-sm="right"
+                  >
+                    <b-form-input
+                      v-model="form.tel"
+                      type="tel"
+                      placeholder="Numéro de téléphone"
+                      required
+                    ></b-form-input>
+                  </b-form-group>
+                  <b-form-group label-cols-sm="3" label-align-sm="right">
+                    <input type="date" v-model="form.date_de_naissance" placeholder="Date de naissance" style="width: 100%;
+    height: 36px;" />
+                  </b-form-group>
+                  <b-form-group>
+                    <b-form-select
+                      v-model="form.civilite"
+                      class="mb-3 mt-4 col-md-6"
+                      style="
+
+                        width: 100%;
+                        height: 34px;
+                        color: #495057;
+                      "
+                    >
+                      <b-form-select-option disabled
+                        >Civilité</b-form-select-option
+                      >
+                      <b-form-select-option value="homme"
+                        >Homme</b-form-select-option
+                      >
+                      <b-form-select-option value="femme"
+                        >Femme</b-form-select-option
+                      >
+                    </b-form-select>
+                  </b-form-group>
+                  <b-form-group>
+                    <b-form-select
+                      v-model="form.region"
+                      class="mt-2 col-md-6"
+                      style="
+                        margin-top: 24px;
+                        width: 100%;
+                        height: 34px;
+                        color: #495057;
+                      "
+                    >
+                      <b-form-select-option disabled
+                        >Gouvernorat</b-form-select-option
+                      >
+                      <b-form-select-option
+                        v-for="reg in regions"
+                        :key="reg.id"
+                        :value="reg.nom"
+                        >{{ reg.nom }}</b-form-select-option
+                      >
+                    </b-form-select>
+                  </b-form-group>
+                </b-form-group>
+              </div>
+            </div>
+            <b-button
+              block
+              @click.prevent="
+                (event) => {
+                  onSubmit(event, 'candidat');
+                }
+              "
+              variant="primary"
+              class="mt-3 btnRegister"
+              >S'inscrire</b-button
+            >
+          </b-tab>
+          <b-tab title="Entreprise">
+            <h3 class="register-heading">Inscription Entreprise</h3>
+            <div class="row register-form">
+              <div class="col-md-6">
+                <b-form-group
+                  label-cols-lg="3"
+                  label-size="lg"
+                  label-class="font-weight-bold pt-0"
+                  class="mb-0"
+                >
+                  <b-form-group label-cols-sm="3" label-align-sm="right">
+                    <b-form-input
+                      id="nom"
+                      v-model="form.nom"
+                      type="text"
+                      placeholder="Nom"
+                      required
+                    ></b-form-input>
+                  </b-form-group>
+
+                  <b-form-group label-cols-sm="3" label-align-sm="right">
+                    <b-form-input
+                      id="prenom"
+                      v-model="form.prenom"
+                      type="text"
+                      placeholder="prenom"
+                      required
+                    ></b-form-input>
+                  </b-form-group>
+                  <b-form-group label-cols-sm="3" label-align-sm="right">
+                    <b-form-input
+                      id="nom_entreprise"
+                      v-model="form.nom_entreprise"
+                      type="text"
+                      placeholder="Nom de l'organisation"
+                      required
+                    ></b-form-input>
+                  </b-form-group>
+                  <b-form-group label-cols-sm="3" label-align-sm="right">
+                    <b-form-input
+                      id="email"
+                      v-model="form.email"
+                      type="email"
+                      placeholder="Email"
+                      required
+                    ></b-form-input>
+                  </b-form-group>
+
+                  <b-form-group label-cols-sm="3" label-align-sm="right">
+                    <b-form-input
+                      id="password"
+                      v-model="form.password"
+                      type="password"
+                      placeholder="Mot de passe"
+                      required
+                    ></b-form-input>
+                  </b-form-group>
+                  <b-form-group label-cols-sm="3" label-align-sm="right">
+                    <b-form-input
+                      id="password_confirmation"
+                      v-model="form.password_confirmation"
+                      type="password"
+                      placeholder="Confirmer le mot de passe"
+                      required
+                    ></b-form-input>
+                  </b-form-group>
+                </b-form-group>
+              </div>
+              <div class="col-md-6" style="margin-top: -9px">
+                <b-form-group
+                  label-cols-lg="3"
+                  label-size="lg"
+                  label-class="font-weight-bold pt-0"
+                  class="mb-0"
+                >
+                  <b-form-group
+                    label-for="tel"
+                    label-cols-sm="3"
+                    label-align-sm="right"
+                  >
+                    <b-form-input
+                      id="tel"
+                      v-model="form.tel"
+                      type="tel"
+                      placeholder="Numéro de téléphone"
+                      required
+                    ></b-form-input>
+                  </b-form-group>
+                  <b-form-group>
+                    <b-form-select
+                      v-model="form.region"
+                      class="mt-3 col-md-6"
+                      style="
+                        margin-top: 24px;
+                        width: 100%;
+                        height: 34px;
+                        color: #495057;
+                      "
+                    >
+                      <b-form-select-option disabled
+                        >Gouvernorat</b-form-select-option
+                      >
+                      <b-form-select-option
+                        v-for="reg in regions"
+                        :key="reg.id"
+                        :value="reg.id"
+                        >{{ reg.nom }}</b-form-select-option
+                      >
+                    </b-form-select>
+                  </b-form-group>
+                  <b-form-group>
+                    <b-form-select
+                      v-model="form.secteur"
+                      class="mb-4 mt-3 col-md-6"
+                      style="
+                        width: 100%;
+                        height: 34px;
+                        color: #495057;
+                        border: 1;
+                      "
+                    >
+                      <b-form-select-option disabled
+                        >Secteur</b-form-select-option
+                      >
+                      <b-form-select-option
+                        v-for="sec in secteurs"
+                        :key="sec.id"
+                        :value="sec.id"
+                        >{{ sec.nom }}</b-form-select-option
+                      >
+                    </b-form-select>
+                  </b-form-group>
+                </b-form-group>
+              </div>
+            </div>
+            <b-button
+              block
+              @click.prevent="
+                (event) => {
+                  onSubmit(event, 'entreprise');
+                }
+              "
+              variant="primary"
+              class="mt-3 btnRegister"
+              >S'inscrire</b-button
+            >
+          </b-tab>
+        </b-tabs>
+      </div>
+    </div>
+  </div>
+</template>
+<script>
+import "bootstrap/dist/css/bootstrap.css";
+import "bootstrap-vue/dist/bootstrap-vue.css";
+import VuePhoneNumberInput from "vue-phone-number-input";
+import "vue-phone-number-input/dist/vue-phone-number-input.css";
+export default {
+  name: "App",
+
+  data() {
+    return {
+      form: {},
+      select: null,
+      secteurs: [],
+      regions: [],
+    };
+  },
+  created() {
+    this.axios.get("http://127.0.0.1:8000/api/secteurs").then((res) => {
+      this.secteurs = res.data.secteurs;
+      //console.log(this.secteurs);
+    });
+    this.axios.get("http://127.0.0.1:8000/api/regions").then((res) => {
+      this.regions = res.data.regions;
+      //console.log(this.regions);
+    });
+  },
+  methods: {
+    onSubmit(event, role) {
+      event.preventDefault();
+      this.form.role = role;
+      console.log(this.form);
+      this.axios
+        .post("http://127.0.0.1:8000/api/register", this.form)
+        .then(() => console.log("xccwx"))
+        .catch(() => console.log("error"));
+    },
+    onReset(event) {
+      event.preventDefault();
+    },
+  },
+};
+</script>
+<style scoped>
+/* register style */
+.register {
+  margin-top: 3%;
+  padding: 3%;
+}
+
+.register-left {
+  text-align: center;
+  color: #fff;
+  margin-top: 4%;
+}
+
+.register-left >>> input {
+  border: none;
+  border-radius: 1.5rem;
+  padding: 2%;
+  width: 60%;
+  background: #f8f9fa;
+  font-weight: bold;
+  color: #383d41;
+  margin-top: 0%;
+  margin-bottom: 3%;
+  cursor: pointer;
+}
+
+/*.register-right {
+    background: #f8f9fa;
+    border-top-left-radius: 10% 50%;
+    border-bottom-left-radius: 10% 50%;
+}*/
+
+.register-left >>> img {
+  width: 100%;
+}
+
+@-webkit-keyframes mover {
+  0% {
+    transform: translateY(0);
+  }
+
+  100% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes mover {
+  0% {
+    transform: translateY(0);
+  }
+
+  100% {
+    transform: translateY(-20px);
+  }
+}
+
+.register-left >>> p {
+  font-weight: lighter;
+  padding: 12%;
+  margin-top: -9%;
+}
+
+.register >>> .register-form {
+  padding: 7%;
+  margin-top: 18%;
+}
+
+.btnRegister {
+  align-content: center;
+  margin-top: 10%;
+  border: none;
+  border-radius: 1.5rem;
+  padding: 1%;
+  background: #007bff;
+  color: #fff;
+  font-weight: 500;
+  width: 30%;
+  cursor: pointer;
+}
+
+.register >>> .nav-tabs {
+  border: none;
+  background: #007bff;
+  border-radius: 1.5rem;
+  width: 242px;
+  float: right;
+  margin-top: -4%;
+  margin-right: 15px;
+}
+
+.register >>> .nav-tabs .nav-link {
+  padding: 2%;
+  height: 34px;
+  font-weight: 600;
+  color: #fff;
+  border-top-right-radius: 1.5rem;
+  border-bottom-right-radius: 1.5rem;
+  width: 121px;
+}
+
+.register >>> .nav-tabs .nav-link:hover {
+  border: none;
+}
+
+.register >>> .nav-tabs .nav-link.active {
+  background-color: #fff;
+  color: #007bff;
+  border: 2px solid #007bff;
+  border-top-left-radius: 1.5rem;
+  border-bottom-left-radius: 1.5rem;
+}
+.nav-tabs .nav-item.show .nav-link,
+.nav-tabs .nav-link.active {
+  color: #495057;
+
+  background-color: #fff;
+  border-color: #dee2e6 #dee2e6 #fff;
+}
+.tab-content > .active {
+  display: block;
+}
+.fade {
+  transition: opacity 0.15s linear;
+}
+
+.register-heading {
+  text-align: center;
+  margin-top: 8%;
+  margin-bottom: -200px;
+  color: #495057;
+}
+.btnLogin {
+  margin-top: 15px;
+  border: none;
+  border-radius: 1.5rem;
+  padding: 1%;
+  background: #007bff;
+  color: #fff;
+  font-weight: 600;
+  width: 59%;
+  cursor: pointer;
+}
+</style>

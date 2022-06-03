@@ -1,0 +1,179 @@
+<template>
+  <div>
+    <header>
+      <navbar />
+    </header>
+    <div class="bradcam_area bradcam_bg_1">
+      <div class="container" style="display: inline-block">
+        <div class="row">
+          <div class="col-xl-12">
+            <div class="bradcam_text">
+              <h3>Offres Par Secteur</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <section class="section">
+      <div class="container" style="display: block">
+        <div class="row">
+          <div class="col-lg-4">
+            <div class="card job-Categories-box bg-light border-0">
+              <div class="card-body p-4">
+                <ul
+                  class="list-unstyled job-Categories-list mb-0"
+                  style="text-align: initial; font-size: large"
+                  v-for="sec in secteurs"
+            :key="sec.id"
+            :value="sec.id">
+                  <li>
+                    <a href="job-list.html" style="color:black"
+                      >{{sec.nom}}
+                      <span class="badge bg-soft-info float-end">25</span></a
+                    >
+                  </li>
+               
+               
+                </ul>
+              </div>
+            </div>
+          </div>
+          <!--end col-->
+        </div>
+        <!--end row-->
+      </div>
+      <!--end container-->
+    </section>
+    <footer class="footer">
+      <div class="footer_top">
+        <div class="container">
+          <div class="row">
+            <div class="col-xl-3 col-md-6 col-lg-3">
+              <div
+                class="footer_widget wow fadeInUp"
+                data-wow-duration="1s"
+                data-wow-delay=".3s"
+              >
+                <div class="footer_logo">
+                  <a href="#">
+                    <img src="@/assets/logo.png" alt="" />
+                  </a>
+                </div>
+                <p>
+                  finloan@support.com <br />
+                  +10 873 672 6782 <br />
+                  600/D, Green road, NewYork
+                </p>
+                <div class="socail_links">
+                  <ul>
+                    <li>
+                      <a href="#">
+                        <i class="ti-facebook"></i>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">
+                        <i class="fa fa-google-plus"></i>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">
+                        <i class="fa fa-twitter"></i>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">
+                        <i class="fa fa-instagram"></i>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-2 col-md-6 col-lg-2">
+              <div
+                class="footer_widget wow fadeInUp"
+                data-wow-duration="1.1s"
+                data-wow-delay=".4s"
+              >
+                <h3 class="footer_title">Company</h3>
+                <ul>
+                  <li><a href="#">About </a></li>
+                  <li><a href="#"> Pricing</a></li>
+                  <li><a href="#">Carrier Tips</a></li>
+                  <li><a href="#">FAQ</a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-xl-3 col-md-6 col-lg-3">
+              <div
+                class="footer_widget wow fadeInUp"
+                data-wow-duration="1.2s"
+                data-wow-delay=".5s"
+              >
+                <h3 class="footer_title">Category</h3>
+                <ul>
+                  <li><a href="#">Design & Art</a></li>
+                  <li><a href="#">Engineering</a></li>
+                  <li><a href="#">Sales & Marketing</a></li>
+                  <li><a href="#">Finance</a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-xl-4 col-md-6 col-lg-4">
+              <div
+                class="footer_widget wow fadeInUp"
+                data-wow-duration="1.3s"
+                data-wow-delay=".6s"
+              >
+                <h3 class="footer_title">Subscribe</h3>
+                <form action="#" class="newsletter_form">
+                  <input type="text" placeholder="Enter your mail" />
+                  <button type="submit">Subscribe</button>
+                </form>
+                <p class="newsletter_text">
+                  Esteem spirit temper too say adieus who direct esteem esteems
+                  luckily.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="copy-right_text wow fadeInUp"
+        data-wow-duration="1.4s"
+        data-wow-delay=".3s"
+      >
+        <div class="container">
+          <div class="footer_border"></div>
+          <div class="row">
+            <div class="col-xl-12">
+              <p class="copy_right text-center"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+</template>
+
+<script>
+import Navbar from "@/components/Navbar.vue";
+export default {
+    data(){
+     return{
+         secteurs:[]
+     }
+    },
+  components: { Navbar },
+  created() {
+    this.user = JSON.parse(localStorage.getItem("user"));
+    this.axios.get("http://127.0.0.1:8000/api/secteurs").then((res) => {
+      this.secteurs = res.data.secteurs;
+    });}
+};
+</script>
+
+<style >
+</style>
