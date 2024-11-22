@@ -853,13 +853,13 @@
           </div>
         </div>
       </div>
-      <button
+    <!--  <button
         v-on:click="exportPdf()"
         class="submitBnt btn btn-primary mt-5"
         id="btn"
       >
         pdf
-      </button>
+      </button>-->
     </div>
 
     <!---
